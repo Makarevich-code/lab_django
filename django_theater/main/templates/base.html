@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Театр «Маска»{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <a href="{% url 'home' %}" class="logo">Театр «Маска»</a>
+        <nav>
+            <ul class="nav-links">
+                <li>
+                    <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Главная</a>
+                </li>
+                <li>
+                    <a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">О театре</a>
+                </li>
+                <li>
+                    <a href="{% url 'contacts' %}" class="{% if request.resolver_match.url_name == 'contacts' %}active{% endif %}">Контакты</a>
+                </li>
+                <li>
+                    <a href="{% url 'how_to_find' %}" class="{% if request.resolver_match.url_name == 'how_to_find' %}active{% endif %}">Как нас найти</a>
+                </li>
+                <li>
+                    <a href="{% url 'poster' %}" class="{% if request.resolver_match.url_name == 'poster' %}active{% endif %}">Афиша</a>
+                </li>
+                <li>
+                    <a href="{% url 'troupe' %}" class="{% if request.resolver_match.url_name == 'troupe' %}active{% endif %}">Труппа</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Театр «Маска». Все права защищены.</p>
+    </footer>
+</body>
+</html>

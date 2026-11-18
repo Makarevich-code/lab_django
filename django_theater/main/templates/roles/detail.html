@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Роль{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>{{ role.name }}</h1>
+    <p>
+        <a href="{% url 'role_update' role.pk %}" class="btn">Изменить</a>
+        <a href="{% url 'role_list' %}" class="btn">← К списку</a>
+    </p>
+</div>
+{% endblock %}

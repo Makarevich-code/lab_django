@@ -1,40 +1,35 @@
 {% extends 'base.html' %}
-
 {% block title %}Афиша — Театр «Маска»{% endblock %}
-
 {% block content %}
-<div class="content-block">
+<div class="card">
     <h1>Афиша</h1>
-    <p class="subtitle">Ближайшие спектакли</p>
-    
-    <div class="poster-list">
-        <div class="poster-item">
-            <h3>«Вишнёвый сад»</h3>
-            <p class="date">15 и 16 ноября 2026</p>
-            <p>Классика А.П. Чехова в современной постановке. Режиссёр — И. Петров.</p>
-        </div>
-        
-        <div class="poster-item">
-            <h3>«Гамлет»</h3>
-            <p class="date">22 и 23 ноября 2026</p>
-            <p>Трагедия У. Шекспира. Главную роль исполняет ведущий артист труппы.</p>
-        </div>
-        
-        <div class="poster-item">
-            <h3>«Снежная королева»</h3>
-            <p class="date">29 и 30 ноября 2026</p>
-            <p>Семейный спектакль по сказке Г.Х. Андерсена. Для детей от 6 лет.</p>
-        </div>
-        
-        <div class="poster-item">
-            <h3>«Три сестры»</h3>
-            <p class="date">6 и 7 декабря 2026</p>
-            <p>Ещё одна чеховская постановка. Билеты уже в продаже!</p>
-        </div>
+    <div class="page-actions">
+        <a href="{% url 'performance_list' %}" class="btn">Все спектакли</a>
+        <a href="{% url 'performance_create' %}" class="btn btn-success">+ Добавить</a>
     </div>
-    
-    <p>
-        Билеты можно приобрести в кассе театра или заказать по телефону +7 (495) 123-45-67.
-    </p>
+    <table class="data-table">
+        <tr>
+            <th>Афиша</th>
+            <th>Название</th>
+            <th>Жанр</th>
+            <th>Премьера</th>
+        </tr>
+        {% for p in performances %}
+        <tr>
+            <td>
+                {% if p.photo %}
+                    <img src="{{ p.photo.url }}" class="photo" alt="афиша">
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+            <td><a href="{% url 'performance_detail' p.pk %}">{{ p.title }}</a></td>
+            <td>{{ p.genre }}</td>
+            <td>{{ p.premiere_date }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">Афиша пока пуста</td></tr>
+        {% endfor %}
+    </table>
 </div>
 {% endblock %}

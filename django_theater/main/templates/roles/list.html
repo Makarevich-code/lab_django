@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Рольы{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>Рольы</h1>
+    <div class="page-actions"><a href="{% url 'role_create' %}" class="btn btn-success">+ Добавить роль</a></div>
+    <table class="data-table">
+        <tr><th>ID</th><th>Название</th><th>Действия</th></tr>
+        {% for obj in roles %}
+        <tr>
+            <td>{{ obj.pk }}</td>
+            <td>{{ obj.name }}</td>
+            <td>
+                <a href="{% url 'role_detail' obj.pk %}" class="btn">Подробнее</a>
+                <a href="{% url 'role_update' obj.pk %}" class="btn">Изменить</a>
+                <a href="{% url 'role_delete' obj.pk %}" class="btn btn-danger">Удалить</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">Пусто</td></tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

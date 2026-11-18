@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ worker }} — Театр «Маска»{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>{{ worker.last_name }} {{ worker.first_name }} {{ worker.middle_name }}</h1>
+    {% if worker.photo %}
+        <p><img src="{{ worker.photo.url }}" class="photo-big" alt="фото"></p>
+    {% endif %}
+    <ul>
+        <li><strong>Должность:</strong> {{ worker.position }}</li>
+        <li><strong>Дата рождения:</strong> {{ worker.birth_date }}</li>
+        <li><strong>Телефон:</strong> {{ worker.phone }}</li>
+        <li><strong>Email:</strong> {{ worker.email }}</li>
+        <li><strong>Дата начала работы:</strong> {{ worker.start_date }}</li>
+        <li><strong>Количество детей:</strong> {{ worker.children_count }}</li>
+    </ul>
+    <p>
+        <a href="{% url 'worker_update' worker.pk %}" class="btn">Изменить</a>
+        <a href="{% url 'worker_list' %}" class="btn">← К списку</a>
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Удаление{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>Удалить награда?</h1>
+    <p>{{ object }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Да, удалить</button>
+        <a href="{% url 'award_list' %}" class="btn">Отмена</a>
+    </form>
+</div>
+{% endblock %}

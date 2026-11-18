@@ -6,30 +6,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Театр «Маска»{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <style>
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 2px;
+            background: #6b2d2d;
+            color: #f5e6d3;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover { background: #4a1c1c; color: #fff; }
+        .btn-success { background: #2d6b3a; }
+        .btn-danger { background: #8b1a1a; }
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: #fff;
+        }
+        table.data-table th, table.data-table td {
+            border: 1px solid #d4c0a8;
+            padding: 10px;
+            text-align: left;
+        }
+        table.data-table th {
+            background: #6b2d2d;
+            color: #f5e6d3;
+        }
+        table.data-table tr:nth-child(even) { background: #f8f1e9; }
+        .photo {
+            max-width: 120px;
+            max-height: 120px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+        .photo-big {
+            max-width: 280px;
+            max-height: 280px;
+            border-radius: 8px;
+        }
+        form p { margin-bottom: 12px; }
+        form input, form select, form textarea {
+            width: 100%;
+            max-width: 400px;
+            padding: 8px;
+            border: 1px solid #c9b8a0;
+            border-radius: 4px;
+        }
+        .page-actions { margin-bottom: 15px; }
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <header>
         <a href="{% url 'home' %}" class="logo">Театр «Маска»</a>
         <nav>
             <ul class="nav-links">
-                <li>
-                    <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Главная</a>
-                </li>
-                <li>
-                    <a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">О театре</a>
-                </li>
-                <li>
-                    <a href="{% url 'contacts' %}" class="{% if request.resolver_match.url_name == 'contacts' %}active{% endif %}">Контакты</a>
-                </li>
-                <li>
-                    <a href="{% url 'how_to_find' %}" class="{% if request.resolver_match.url_name == 'how_to_find' %}active{% endif %}">Как нас найти</a>
-                </li>
-                <li>
-                    <a href="{% url 'poster' %}" class="{% if request.resolver_match.url_name == 'poster' %}active{% endif %}">Афиша</a>
-                </li>
-                <li>
-                    <a href="{% url 'troupe' %}" class="{% if request.resolver_match.url_name == 'troupe' %}active{% endif %}">Труппа</a>
-                </li>
+                <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Главная</a></li>
+                <li><a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">О театре</a></li>
+                <li><a href="{% url 'poster' %}" class="{% if request.resolver_match.url_name == 'poster' %}active{% endif %}">Афиша</a></li>
+                <li><a href="{% url 'troupe' %}" class="{% if request.resolver_match.url_name == 'troupe' %}active{% endif %}">Труппа</a></li>
+                <li><a href="{% url 'worker_list' %}" class="{% if 'worker' in request.resolver_match.url_name %}active{% endif %}">Работники</a></li>
+                <li><a href="{% url 'performance_list' %}" class="{% if 'performance' in request.resolver_match.url_name %}active{% endif %}">Спектакли</a></li>
+                <li><a href="{% url 'genre_list' %}" class="{% if 'genre' in request.resolver_match.url_name %}active{% endif %}">Жанры</a></li>
+                <li><a href="{% url 'role_list' %}" class="{% if 'role' in request.resolver_match.url_name %}active{% endif %}">Роли</a></li>
+                <li><a href="{% url 'award_list' %}" class="{% if 'award' in request.resolver_match.url_name %}active{% endif %}">Награды</a></li>
+                <li><a href="{% url 'contacts' %}" class="{% if request.resolver_match.url_name == 'contacts' %}active{% endif %}">Контакты</a></li>
             </ul>
         </nav>
     </header>

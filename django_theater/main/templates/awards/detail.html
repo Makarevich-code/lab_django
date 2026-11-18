@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Награда{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>{{ award.name }}</h1>
+    <p>
+        <a href="{% url 'award_update' award.pk %}" class="btn">Изменить</a>
+        <a href="{% url 'award_list' %}" class="btn">← К списку</a>
+    </p>
+</div>
+{% endblock %}

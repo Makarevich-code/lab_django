@@ -1,30 +1,54 @@
-# Театр «Маска» — Django маршрутизация
+# Театр «Маска» — Django (модели, миграции, CRUD, статика)
 
-Практическая работа по МДК 02.02 «Инструментальные средства разработки программного обеспечения».
+Практическая работа: модели, миграции и обработка статических/медиа файлов.
+
+## Что реализовано
+
+- **8 таблиц (моделей)**: Position, Worker, Genre, Performance, Role, Award, Repertoire, Ticket
+- **CRUD на 5 основных** через дженерики Django:
+  - Worker (с фото)
+  - Performance (с фото/афишей)
+  - Genre
+  - Role
+  - Award
+- Все данные выводятся через шаблонные теги Django
+- Фотографии корректно загружаются и отображаются
+- Статические файлы (CSS) и медиа настроены
+- После создания / редактирования / удаления — возврат на список
 
 ## Запуск
 
-1. Создайте виртуальное окружение и установите Django:
-   ```
-   python -m venv venv
-   source venv/bin/activate   # Windows: venv\Scripts\activate
-   pip install django
-   ```
+```bash
+pip install django pillow
+cd django_theater
+python manage.py runserver
+```
 
-2. Перейдите в папку проекта и запустите:
-   ```
-   python manage.py runserver
-   ```
+Откройте http://127.0.0.1:8000/
 
-3. Откройте http://127.0.0.1:8000/
+**Админка:** /admin/  
+логин: `admin`  
+пароль: `admin123`
 
-## Структура маршрутов (в main/urls.py)
+## Основные маршруты
 
-- `/` — Главная (name='home')
-- `/about/` — О театре (name='about')
-- `/contacts/` — Контакты (name='contacts')
-- `/how-to-find/` — Как нас найти (name='how_to_find')
-- `/poster/` — Афиша (name='poster')
-- `/troupe/` — Труппа (name='troupe')
+| URL | Описание |
+|-----|----------|
+| / | Главная |
+| /workers/ | Список работников (+ CRUD) |
+| /performances/ | Список спектаклей (+ CRUD) |
+| /genres/ | Жанры (+ CRUD) |
+| /roles/ | Роли (+ CRUD) |
+| /awards/ | Награды (+ CRUD) |
+| /troupe/ | Труппа (данные из БД) |
+| /poster/ | Афиша (данные из БД) |
+| /admin/ | Админ-панель |
 
-Все ссылки используют именованные маршруты {% url 'name' %}.
+## Структура
+
+- `main/models.py` — все 8 моделей
+- `main/views.py` — дженерики + старые страницы
+- `main/urls.py` — маршруты
+- `main/templates/` — шаблоны (workers/, performances/, genres/ и т.д.)
+- `media/` — загруженные фото
+- `main/static/main/css/style.css` — стили

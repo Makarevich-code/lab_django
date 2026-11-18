@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ performance }} — Театр «Маска»{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>{{ performance.title }}</h1>
+    {% if performance.photo %}
+        <p><img src="{{ performance.photo.url }}" class="photo-big" alt="афиша"></p>
+    {% endif %}
+    <ul>
+        <li><strong>Жанр:</strong> {{ performance.genre }}</li>
+        <li><strong>Продолжительность:</strong> {{ performance.duration }} мин</li>
+        <li><strong>Возрастное ограничение:</strong> {{ performance.age_limit }}</li>
+        <li><strong>Дата премьеры:</strong> {{ performance.premiere_date }}</li>
+        <li><strong>Мест в зале:</strong> {{ performance.seats }}</li>
+        <li><strong>Описание:</strong> {{ performance.description|default:"—" }}</li>
+    </ul>
+    <p>
+        <a href="{% url 'performance_update' performance.pk %}" class="btn">Изменить</a>
+        <a href="{% url 'performance_list' %}" class="btn">← К списку</a>
+    </p>
+</div>
+{% endblock %}

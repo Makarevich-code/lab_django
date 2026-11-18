@@ -1,40 +1,37 @@
 {% extends 'base.html' %}
-
 {% block title %}Труппа — Театр «Маска»{% endblock %}
-
 {% block content %}
-<div class="content-block">
+<div class="card">
     <h1>Наша труппа</h1>
-    <p class="subtitle">Люди, которые создают волшебство на сцене</p>
-    
-    <div class="troupe-list">
-        <div class="actor-card">
-            <h3>Анна Смирнова</h3>
-            <p class="role">Ведущая актриса</p>
-            <p>Выпускница ГИТИСа. В труппе с 2018 года. Любимые роли — Нина Заречная и Офелия.</p>
-        </div>
-        
-        <div class="actor-card">
-            <h3>Дмитрий Козлов</h3>
-            <p class="role">Ведущий актёр</p>
-            <p>Работал в нескольких московских театрах. Исполняет главные роли в классическом репертуаре.</p>
-        </div>
-        
-        <div class="actor-card">
-            <h3>Елена Васильева</h3>
-            <p class="role">Актриса</p>
-            <p>Специализируется на современных пьесах и детских спектаклях. Яркая и харизматичная.</p>
-        </div>
-        
-        <div class="actor-card">
-            <h3>Игорь Петров</h3>
-            <p class="role">Режиссёр-постановщик</p>
-            <p>Художественный руководитель театра. Автор большинства постановок текущего репертуара.</p>
-        </div>
+    <p>Люди, которые создают волшебство на сцене</p>
+    <div class="page-actions">
+        <a href="{% url 'worker_list' %}" class="btn">Управление работниками</a>
     </div>
-    
-    <p>
-        Полный состав труппы и подробные биографии актёров скоро появятся на сайте.
-    </p>
+    <table class="data-table">
+        <tr>
+            <th>Фото</th>
+            <th>ФИО</th>
+            <th>Должность</th>
+        </tr>
+        {% for worker in workers %}
+        <tr>
+            <td>
+                {% if worker.photo %}
+                    <img src="{{ worker.photo.url }}" class="photo" alt="фото">
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'worker_detail' worker.pk %}">
+                    {{ worker.last_name }} {{ worker.first_name }} {{ worker.middle_name }}
+                </a>
+            </td>
+            <td>{{ worker.position }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">Пока нет данных о труппе. Добавьте работников.</td></tr>
+        {% endfor %}
+    </table>
 </div>
 {% endblock %}

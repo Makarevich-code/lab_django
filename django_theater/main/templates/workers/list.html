@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Работники — Театр «Маска»{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>Работники театра</h1>
+    <div class="page-actions">
+        <a href="{% url 'worker_create' %}" class="btn btn-success">+ Добавить работника</a>
+    </div>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Фото</th>
+                <th>ФИО</th>
+                <th>Должность</th>
+                <th>Телефон</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for worker in workers %}
+            <tr>
+                <td>
+                    {% if worker.photo %}
+                        <img src="{{ worker.photo.url }}" class="photo" alt="фото">
+                    {% else %}
+                        —
+                    {% endif %}
+                </td>
+                <td>{{ worker.last_name }} {{ worker.first_name }} {{ worker.middle_name }}</td>
+                <td>{{ worker.position }}</td>
+                <td>{{ worker.phone }}</td>
+                <td>
+                    <a href="{% url 'worker_detail' worker.pk %}" class="btn">Подробнее</a>
+                    <a href="{% url 'worker_update' worker.pk %}" class="btn">Изменить</a>
+                    <a href="{% url 'worker_delete' worker.pk %}" class="btn btn-danger">Удалить</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5">Работников пока нет</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
